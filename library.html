@@ -1,0 +1,374 @@
+let library=[];
+function addBook(title1,author1,year1,read_status1)
+{
+    let book1={
+        title:title1,
+        author:author1,
+        year:year1,
+        read_status:read_status1
+    };
+    library.push(book1);
+}
+
+function removeLastBook()
+{
+    library.pop();
+}
+
+function addBookToFront(title1,author1,year1,read_status1)
+{
+    let book1={
+        title:title1,
+        author:author1,
+        year:year1,
+        read_status:read_status1
+    };
+    library.unshift(book1);
+}
+
+function removeFirstBook()
+{
+    library.shift();
+}
+
+addBook("leo","lokesh",2023,false);
+addBook("jailor","nelson",2021,false);
+addBook("kaithi","lokesh",2019,true);
+addBook("ponniyin selvan","mani",2021,false);
+
+function getAllTitles()
+{
+    let arr_title=[];
+    arr_title=library.map(get_title);
+    function get_title(obj)
+    {
+        return obj.title;
+    }
+    const out=document.getElementById("output1");
+    //out.innerHTML="Hello";
+    for(let i=0;i<arr_title.length;i++)
+    {
+    out.innerHTML+=arr_title[i];
+    out.innerHTML+="<br><hr>";
+    }
+    //if(out!=null)
+    getelement.innerHTML=out;
+    //<p>hello</p>
+    //<p>hello</p>;   
+}
+//console.log(getAllTitles());
+
+function getBooksByAuthor(author)
+{
+    let book_author=[];
+    book_author=library.filter(author_name);
+    function author_name(obj)
+    {
+        if(obj.author==author)
+        return obj;
+    }
+    let out2=document.getElementById("output2");
+    for(let i=0;i<book_author.length;i++)
+    {
+     out2.innerHTML+=book_author[i].title;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=book_author[i].author;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=book_author[i].year;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=book_author[i].read_status;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+="<br><hr>";
+    }
+    let a1=document.getElementById("getbyauthor");
+    a1.innerHTML=out2;
+}
+console.log(library);
+
+function getTotalBooksPublishedBefore(year)
+{
+    let pub_before=[];
+    pub_before=library.filter(find_year);
+    function find_year(obj)
+    {
+        if(obj.year<year)
+        {
+            return obj.year;
+        }
+    }
+    let out2=document.getElementById("output2");
+    for(let i=0;i<pub_before.length;i++)
+    {
+     out2.innerHTML+=pub_before[i].title;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=pub_before[i].author;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=pub_before[i].year;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=pub_before[i].read_status;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+="<br><hr>";
+    }
+    let a1=document.getElementById("getbyyear");
+    a1.innerHTML=out2;
+}
+//console.log(getTotalBooksPublishedBefore(2022));
+
+function removeBookByTitle(title)
+{
+    let index;
+    for(let i=0;i<library.length;i++)
+    {
+        if(library[i].title==title)
+        {
+            index=i;
+            break;
+        }
+    }
+    library.splice(index,1);
+}
+//removeBookByTitle("kaithi");
+//console.log(library);
+
+function getBooksByReadStatus(status)
+{
+    let book_status=[];
+    book_status=library.filter(status_result);
+    function status_result(obj)
+    {
+        //console.log(obj.read_status);
+        if(obj.read_status===Boolean(status))
+        {
+            console.log(status);
+        return obj;
+        }
+    }
+ 
+    let out2=document.getElementById("output2");
+    for(let i=0;i<book_status.length;i++)
+    {
+     out2.innerHTML+=book_status[i].title;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=book_status[i].author;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=book_status[i].year;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+=book_status[i].read_status;
+     out2.innerHTML+="<br><hr>";
+     out2.innerHTML+="<br><hr>";
+    }
+    let a1=document.getElementById("getbystatus");
+    a1.innerHTML=out2;
+//console.log(getBooksByReadStatus(true));
+}
+
+function getSubLibrary(start, end)
+{
+    return library.slice(start,end);
+}
+//console.log(getSubLibrary(0,3));
+
+const getelement=document.getElementById("content");
+
+function addbook()
+{
+    a=document.getElementById("addingBook").style.display='block';
+    getelement.innerHTML=a;
+}
+function add_it()
+{
+    const title1=document.getElementById('title');
+    const author1=document.getElementById('author');
+    const year1=document.getElementById('year');
+    const status1=document.getElementById('status');
+    addBook(title1.value,author1.value,year1.value,status1.value);
+    //console.log(title1.value);
+    //console.log(library);
+}
+//NOT WORKING
+function go_back()
+{
+    a=document.getElementById("addingBook");
+    
+    a.innerHTML=getelement;
+}
+//console.log(library);
+
+function getByAuthor()
+{
+    b=document.getElementById("getbyauthor").style.display='block';
+    getelement.innerHTML=b;
+}
+function search_it()
+{
+    let s=document.getElementById("author_name");
+    //console.log(s.value);
+    getBooksByAuthor(s.value);
+}
+
+function getByStatus()
+{
+    b=document.getElementById("getbystatus").style.display='block';
+    getelement.innerHTML=b;
+}
+function search_it1()
+{
+    ;
+    let s1=document.getElementById("status1");
+    //console.log(s1.value);
+    getBooksByReadStatus(s1.value);
+}
+//let btnBack=document.getElementById("but");
+// btnBack.addEventListener('click',()=>{
+//     window.history.back();
+// });
+
+function getByYear()
+{
+  b=document.getElementById("getbyyear").style.display='block';
+    getelement.innerHTML=b;
+}
+function search_it2()
+{
+    ;
+    let s1=document.getElementById("year1");
+    //console.log(s1.value);
+    getTotalBooksPublishedBefore(s1.value);
+}
+
+
+body{
+  background-color: rgb(14, 11, 7);
+}
+.lib{
+  background-color: aliceblue;
+  text-align:center;
+  padding: 20px;
+  width: 100%;
+}
+.btn{
+  background-color: aquamarine;
+  width:500px;
+  border-radius: 5px;
+  margin:50px auto 0;
+  padding:20px;
+  display: flex;
+}
+.btn:hover{
+  background-color: rgb(3, 73, 50);
+  color: white;
+}
+#addingBook,#getbyauthor,#getbystatus,#getbyyear{
+  background-color: rgb(234, 241, 123);
+  width:500px;
+  border-radius: 5px;
+  margin:30px auto 0;
+  padding:20px;
+  display: none;
+  align-items: center;
+}
+#title,#author,#year,#status,#author_name,#status1{
+  margin: 10px auto 20px;
+ 
+}
+.sub_btn{
+  background-color: aquamarine;
+  width:300px;
+  border-radius: 5px;
+  margin:50px auto 0;
+  padding:20px;
+  display: flex;
+}
+#output1{
+  background-color:  #209599;
+  color: white;
+  border: 1px solid #792099;
+  border-radius: 5px;
+  margin: 20px auto 0;
+  font-size: 20px;
+  width:500px;
+  padding:10px;
+  
+  
+}
+#output2
+{
+  background-color:  #209599;
+  color: white;
+  border: 1px solid #792099;
+  border-radius: 5px;
+  margin: 20px auto 0;
+  font-size: 20px;
+  width:500px;
+  padding:10px;
+  
+  
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Library_online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="app">
+        <div class="lib">
+            <h1>PERSONAL LIBRARY</h1>
+            <p style="color:red;" class="output1" id="output1"></p>
+            <div id="content">
+                <button class="btn" onclick="addbook()">ADD NEW BOOKS</button>
+                <button class="btn" onclick="getAllTitles()">GET TITLES </button>
+                <button class="btn" onclick="getByAuthor()">GET BOOK BY AUTHOR</button>
+                <button class="btn" onclick=" getByStatus()">GET BOOK BY STATUS </button>
+                <button class="btn" onclick="getByYear()">GET BOOK BY YEAR</button>
+            </div>
+            <div id="addingBook" >
+                <form >
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title"><br>
+                    <label for="author">Author Name:</label>
+                    <input type="text" id="author" name="author"><br>
+                    <label for="author">Year:</label>
+                    <input type="text" id="year" name="year"><br>
+                    <label for="author">Read Status:</label>
+                    <input type="text" id="status" name="status">
+                  </form>
+                  <button class="sub_btn" onclick="add_it()">SUBMIT</button>
+                  <a href="index.html"><button>DONE</button></a>
+            </div>
+            <div id="getbyauthor">
+                <form>
+                    <lable for="title">ENTER AUTHOR NAME:</lable>
+                    <input type="text" id="author_name" name="author_name"><br>
+                </form>
+                <button class="sub_btn" onclick="search_it()">SUBMIT</button>
+            </div>
+            <div id="getbystatus">
+                <form>
+                    <lable for="title">ENTER THE STATUS:</lable>
+                    <input type="text" id="status1" name="status1"><br>
+                </form>
+                <button class="sub_btn" onclick="search_it1()">SUBMIT</button>
+            </div>
+            <div id="getbyyear">
+              <form>
+                  <lable for="title">ENTER THE YEAR:</lable>
+                  <input type="text" id="year1" name="year1"><br>
+              </form>
+              <button class="sub_btn" onclick="search_it2()">SUBMIT</button>
+          </div>
+            <p class="output2" id="output2"></p>
+                
+            
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+	
+
